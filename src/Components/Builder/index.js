@@ -1,9 +1,10 @@
 import React from 'react'
 import { View, Text, FlatList } from 'react-native'
-import { Slider } from '../'
+import { Slider, ProductBox } from '../'
 
 const components = [
-  { type: "slider", component: Slider }
+  { type: "slider", component: Slider },
+  { type: "product-box", component: ProductBox },
 ]
 
 const renderItem = ({ item, index }) => {
