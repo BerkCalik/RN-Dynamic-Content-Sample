@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import { Header, Footer } from '../../Components'
 import Builder from '../../Components/Builder'
 import { getHomeData } from '../../Services'
 
@@ -22,7 +23,9 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
+      <Header />
       {data != null ? <Builder data={data} /> : null}
+      <Footer />
     </View>
   );
 };
