@@ -26,7 +26,11 @@ const Slider = (props) => {
     <View style={styles.container}>
       <Text style={styles.title}>{props.title}</Text>
 
-      <Swiper showsButtons={true}>
+      <Swiper 
+        showsButtons
+        autoplay
+        loop
+      >
         {renderSliderItems(props.items)}
       </Swiper>
     </View>
@@ -38,7 +42,6 @@ export default Slider;
 const styles = StyleSheet.create({
   container: {
     height: 200,
-    marginVertical: 10
   },
   title: {
     fontWeight: "600",

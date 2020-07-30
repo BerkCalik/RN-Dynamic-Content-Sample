@@ -1,10 +1,11 @@
 import React from 'react'
 import { View, Text, FlatList } from 'react-native'
-import { Slider, ProductBox } from '../'
+import { Slider, ProductBox, BlogPosts } from '../'
 
 const components = [
   { type: "slider", component: Slider },
   { type: "product-box", component: ProductBox },
+  { type: "last-blog-posts", component: BlogPosts },
 ]
 
 const renderItem = ({ item, index }) => {
@@ -26,6 +27,7 @@ const Builder = ({ data }) => {
       data={data}
       renderItem={renderItem}
       keyExtractor={(item, index) => "builder-item-" + index}
+      ItemSeparatorComponent={() => <View style={{ height: 15 }} />}
     />
   )
 }
