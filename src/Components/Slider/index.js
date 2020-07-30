@@ -1,33 +1,33 @@
 //flow
 
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
 import Swiper from 'react-native-swiper';
 
+const renderSliderItems = (items) => {
+  
+  return (
+    items.map(item => (
+      <View style={styles.slide} key={"slider-item-" + item.id}>
+        <Image
+          source={{ uri: item.image }}
+          style={styles.image}
+        />
+      </View>
+    ))
+  )
+}
+
 const Slider = (props) => {
+  if (props?.items?.length == 0) {
+    return null
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{props.title}</Text>
 
       <Swiper showsButtons={true}>
-        <View style={styles.slide}>
-          <Image
-            source={{uri: 'https://picsum.photos/id/1/1920/1080'}}
-            style={styles.image}
-          />
-        </View>
-        <View style={styles.slide}>
-          <Image
-            source={{uri: 'https://picsum.photos/id/1/1920/1080'}}
-            style={styles.image}
-          />
-        </View>
-        <View style={styles.slide}>
-          <Image
-            source={{uri: 'https://picsum.photos/id/1/1920/1080'}}
-            style={styles.image}
-          />
-        </View>
+        {renderSliderItems(props.items)}
       </Swiper>
     </View>
   );
