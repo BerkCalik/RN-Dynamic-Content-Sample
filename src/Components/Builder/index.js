@@ -1,6 +1,7 @@
 import React from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, ActivityIndicator } from 'react-native'
 import { Slider, ProductBox, BlogPosts } from '../'
+import { getPageData } from '../../Services'
 
 const components = [
   { type: "slider", component: Slider },
@@ -19,9 +20,31 @@ const renderItem = ({ item, index }) => {
   return null
 }
 
-const Builder = ({ data }) => {
+const Builder = ({ endpoint }) => {
 
-  console.log("builder data: ", data)
+  const [data, setData] = React.useState(null);
+  const [ready, setReady] = React.useState(false)
+
+  React.useEffect(() => {
+    const getData = async () => {
+      let _data = await getPageData(endpoint);
+      _data = _data.filter(d => d.published)
+      _data.sort((a, b) => a.order - b.order)
+      console.log("data: ", data)
+
+      setData(_data)
+      setReady(true)
+    }
+
+    getData()
+  }, []);
+
+  if (!ready) {
+    return <View style={{ flex: 1, justifyContent: "center" }}>
+      <ActivityIndicator style={{ alignSelf: "center" }} size="large" color="#000" />
+    </View>
+  }
+
   return (
     <FlatList
       data={data}
