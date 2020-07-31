@@ -20,19 +20,28 @@ const renderItem = ({ item, index }) => {
   return null
 }
 
-const Builder = ({ endpoint }) => {
+const Builder = ({ endpoint, defaultModel }) => {
 
   const [data, setData] = React.useState(null);
   const [ready, setReady] = React.useState(false)
 
   React.useEffect(() => {
     const getData = async () => {
-      let _data = await getPageData(endpoint);
-      _data = _data.filter(d => d.published)
-      _data.sort((a, b) => a.order - b.order)
-      console.log("data: ", data)
-
-      setData(_data)
+      try {
+        let _data = await getPageData(endpoint);
+        if (_data != null) {
+          _data = _data.filter(d => d.published)
+          if (_data.length > 0) {
+            _data.sort((a, b) => a.order - b.order)
+            setData(_data)
+            setReady(true)
+            return;
+          }  
+        }        
+        setData(defaultModel)
+      } catch (error) {
+        setData(defaultModel)
+      }
       setReady(true)
     }
 
