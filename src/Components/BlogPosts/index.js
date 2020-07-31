@@ -19,6 +19,7 @@ const renderItem = ({ item, index }) => (
 const BlogPosts = (props) => {
   return (
     <View>
+      <Text style={styles.componentTitle}>{props.title}</Text>
       <FlatList
         horizontal
         data={props.items}
@@ -35,6 +36,10 @@ export default BlogPosts
 const styles = StyleSheet.create({
   seperator: {
     width: 10
+  },
+  componentTitle: {
+    fontSize: 18,
+    marginBottom: 10
   },
   item: {
     borderWidth: 1,
